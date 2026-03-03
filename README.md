@@ -65,7 +65,7 @@ A complete, structured prompt with:
 | **Anti-Hallucination** | Evidence-first, give-an-out, investigate-before-answering, Prompting Inversion awareness |
 | **Quality Checklist** | 13-point verification before every prompt delivery |
 | **Anti-Patterns Table** | 12 common mistakes with fixes |
-| **Bilingual Triggers** | English + Russian activation phrases |
+| **Multilingual Triggers** | Activates in any language the user writes in |
 
 ## Context-Aware Prompt Generation
 

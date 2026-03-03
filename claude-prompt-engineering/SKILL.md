@@ -11,13 +11,12 @@ description: "Expert prompt engineering skill for creating optimized prompts for
 
 ## When This Skill Activates
 
-Trigger phrases (any language):
+Trigger phrases (multilingual — activates in any language the user writes in):
 - "write/create/make/build a prompt", "prompt for...", "prompt template"
 - "system prompt for...", "instructions for AI/bot/agent"
-- "промпт", "промт", "напиши промпт", "сделай промпт", "инструкция для бота"
 - "GPT prompt", "Claude prompt", "LLM prompt"
 - "chatbot instructions", "AI instructions"
-- Any request that implies creating text to instruct an AI model
+- Any request in any language that implies creating text to instruct an AI model
 
 ## Prompt Creation Protocol
 
