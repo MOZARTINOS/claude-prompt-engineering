@@ -8,6 +8,24 @@
 
 Built from official Anthropic sources — not academic frameworks, not guesswork.
 
+## Why Generate Prompts Inside an AI That Already Knows What to Do?
+
+Because sometimes **you need to leave**. You're deep in a coding session, you hit a wall — missing domain knowledge, need a legal review, need market research, need to analyze a dataset. Your current AI doesn't have that context, or you need a different tool for the job.
+
+Instead of context-switching, losing focus, and manually writing a prompt for Gemini, Perplexity, ChatGPT, or another LLM — you just say **"write me a prompt for deep research on X"**. The skill:
+
+1. **Reads your current context** — what you're building, what stack you're using, what problem you're solving
+2. **Generates an optimized prompt** — with the right structure, real variables from your project, and the right format for the target model
+3. **You paste it into another tool** — and get back exactly what you need, without losing your flow
+
+**Common use cases:**
+- You're building a fintech app → need a deep research prompt about compliance regulations → send to Perplexity
+- You're writing an API → need a prompt to generate test data that matches your schema → send to GPT-4
+- You're debugging → need a prompt to analyze logs with specific patterns → send to Gemini with your files
+- You need a system prompt for a chatbot you're building → generate it right here, already matching your codebase
+
+**TL;DR**: It's a prompt factory that understands your project context and produces ready-to-use prompts for any AI tool — so you never break your flow.
+
 ## What It Does
 
 You say **"write me a prompt for..."** — it automatically gathers context from your current session, then builds a production-ready prompt using a structured 10-part framework derived from Anthropic's own documentation.
