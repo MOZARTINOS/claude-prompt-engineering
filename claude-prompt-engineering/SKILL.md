@@ -63,7 +63,7 @@ When this skill activates, **immediately and in parallel** gather context from t
 - **DO** use real data from the session as few-shot examples when available
 - **DO** match the coding style and naming conventions of the project
 - **DO** reference specific APIs, tools, or schemas from the codebase
-- **DO** write the prompt in the same language the user is using
+- **DO** always write the prompt body (instructions, structure, XML tags) in **English** — all models perform best with English instructions. If the user needs the AI's *response* in another language, append `Respond in [language].` at the end of the prompt
 - **DON'T** ask questions you can answer from the session context
 - **DON'T** use generic placeholders when real data is available
 - **DON'T** ignore existing CLAUDE.md rules — the new prompt must be compatible
