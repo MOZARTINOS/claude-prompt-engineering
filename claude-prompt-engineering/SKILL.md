@@ -32,7 +32,7 @@ When this skill activates, **immediately and in parallel** gather context from t
 | **Tech stack** | Dependencies, imports, framework configs | Informs which tools/integrations to reference |
 | **Current task** | Conversation history, recent tool calls, user's last messages | Defines the GOAL the prompt should serve |
 | **Target platform** | Mentioned in chat: "n8n", "API", "chatbot", "Telegram bot", "web app" | Determines prompt format (system/user, webhook, agent) |
-| **User's language** | Last 3 messages from user — what language are they in? | Prompt instructions should match user's language |
+| **User's language** | Last 3 messages from user — what language are they in? | Prompt body always in English; append "Respond in [language]" if user needs non-English output |
 | **Existing prompts** | CLAUDE.md, `.cursorrules`, system prompts in codebase | Match existing style, avoid contradictions |
 | **Data examples** | Recent file reads, API responses, DB schemas in context | Use as real few-shot examples instead of placeholders |
 
@@ -595,7 +595,7 @@ After answering, self-evaluate:
 
 ### Claude 4.x (Opus 4.6, Sonnet 4.6, Haiku 4.5)
 
-- **No prefill on last assistant turn** — use structured outputs or explicit instructions
+- **No prefill on last assistant turn** (Claude 4.6+) — use structured outputs or explicit instructions instead; prefill is still valid in earlier turns and older models
 - **No aggressive tool language** — "Use this tool when..." NOT "CRITICAL: You MUST use..."
 - **Adaptive thinking** — `thinking: {type: "adaptive"}` replaces `budget_tokens`
 - **Interleaved thinking** — Claude injects `<thinking>` blocks between tool calls. Prompt Claude to execute a tool, observe the result, think about it, then decide the next action dynamically (not plan everything upfront)
@@ -607,9 +607,9 @@ After answering, self-evaluate:
 ### GPT-4o / GPT-5
 
 - **Token-efficient formats**: YAML > JSON for nested data, CSV for flat data. JSON only when integrating with strict REST APIs
-- **GPT-5 Agentic Eagerness**: defaults to exhaustive context gathering. Add early-stop criteria: `<context_gathering>Stop as soon as signals converge</context_gathering>` or set a fixed tool-call budget
-- **Tool preambles**: GPT-5 requires narrating plan before each tool call: `<tool_preamble>Goal: [what this call achieves]</tool_preamble>`
-- **No contradictions**: GPT-5 has catastrophic reasoning paralysis with conflicting instructions — audit for logical consistency
+- **GPT-5 Agentic Eagerness**: defaults to exhaustive context gathering. Add early-stop criteria or set a fixed tool-call budget to reduce latency
+- **Tool preambles** (optional, recommended): GPT-5 can narrate its plan before tool calls. Steer frequency/style via prompt: `"Always begin by rephrasing the user's goal before calling any tools"`
+- **Avoid contradictions**: GPT-5 expends extra reasoning tokens trying to reconcile conflicting instructions, degrading efficiency — audit prompts for logical consistency
 - Use `response_format: { type: "json_object" }` for structured JSON output
 
 ### Gemini 2.x

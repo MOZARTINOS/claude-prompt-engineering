@@ -125,10 +125,10 @@ ls ~/.claude/skills/claude-prompt-engineering/SKILL.md
 
 The skill activates automatically when you ask Claude Code to create a prompt. Trigger phrases include:
 
-| Language | Phrases |
-|----------|---------|
+| Trigger | Examples |
+|---------|----------|
 | English | "write a prompt for...", "create a prompt", "system prompt for...", "prompt template", "LLM prompt", "chatbot instructions" |
-| Russian | "напиши промпт", "сделай промпт", "промпт для...", "инструкция для бота" |
+| Any language | The skill detects prompt-creation intent regardless of language |
 
 ### Manual invocation
 
@@ -190,7 +190,7 @@ META & SECURITY
 
 | Model | Key Adjustments |
 |-------|----------------|
-| **Claude 4.x** | No prefill, no aggressive language, adaptive thinking, structured outputs |
+| **Claude 4.x** | No prefill on last assistant turn (4.6+), no aggressive language, adaptive thinking, structured outputs |
 | **GPT-4/4o** | `response_format` for JSON, JSON schema preferred over XML |
 | **Gemini** | Separate system instructions, response schema, Google Search grounding |
 | **Local (Llama, Mistral)** | Simpler prompts, more examples (5-10), explicit JSON schema |
