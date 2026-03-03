@@ -1,9 +1,9 @@
 ---
-name: prompt-craft
+name: claude-prompt-engineering
 description: "Expert prompt engineering skill for creating optimized prompts for any task, model, and use case. Use when asked to write, create, or improve prompts, system prompts, or AI instructions."
 ---
 
-# Prompt Craft — Expert Prompt Engineering
+# Claude Prompt Engineering — Expert Prompt Craft
 
 > **Sources**: Anthropic [Interactive Tutorial](https://github.com/anthropics/prompt-eng-interactive-tutorial) (9 chapters + 3 appendices), [Claude Prompting Best Practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices), [Prompting Tools](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-tools).
 >
@@ -21,20 +21,67 @@ Trigger phrases (any language):
 
 ## Prompt Creation Protocol
 
-### Phase 1: Clarify (ASK before building)
+### Phase 0: Context Gathering (AUTOMATIC — run silently before anything else)
 
-Before writing any prompt, determine:
+When this skill activates, **immediately and in parallel** gather context from the current session. Do NOT ask the user for this — extract it yourself from what's already available.
 
-| Question | Why it matters |
+#### What to detect
+
+| Signal | Where to look | How it affects the prompt |
+|--------|---------------|--------------------------|
+| **Project type** | `package.json`, `requirements.txt`, `go.mod`, `*.py`, `*.ts`, CLAUDE.md | Determines domain language, code style, relevant APIs |
+| **Tech stack** | Dependencies, imports, framework configs | Informs which tools/integrations to reference |
+| **Current task** | Conversation history, recent tool calls, user's last messages | Defines the GOAL the prompt should serve |
+| **Target platform** | Mentioned in chat: "n8n", "API", "chatbot", "Telegram bot", "web app" | Determines prompt format (system/user, webhook, agent) |
+| **User's language** | Last 3 messages from user — what language are they in? | Prompt instructions should match user's language |
+| **Existing prompts** | CLAUDE.md, `.cursorrules`, system prompts in codebase | Match existing style, avoid contradictions |
+| **Data examples** | Recent file reads, API responses, DB schemas in context | Use as real few-shot examples instead of placeholders |
+
+#### Detection protocol
+
+```
+1. Check conversation history for:
+   - What the user is building (project goal)
+   - What problem they're solving (immediate task)
+   - What they've already tried (avoid duplication)
+   - Any constraints mentioned (model, budget, latency)
+
+2. If in a code project, scan for:
+   - CLAUDE.md / .cursorrules (existing AI instructions)
+   - Main config files (package.json, pyproject.toml, etc.)
+   - Any existing prompt files or system prompts in the codebase
+
+3. Infer from context (don't ask if obvious):
+   - Target model: if they're in Claude Code → Claude; if code mentions openai → GPT
+   - Format: if building n8n workflow → Code node format; if API → system+user
+   - Persona: match the domain of the project (fintech → financial analyst, etc.)
+   - Output format: if downstream is JSON API → JSON; if human-facing → prose
+```
+
+#### Context injection rules
+
+- **DO** use real data from the session as few-shot examples when available
+- **DO** match the coding style and naming conventions of the project
+- **DO** reference specific APIs, tools, or schemas from the codebase
+- **DO** write the prompt in the same language the user is using
+- **DON'T** ask questions you can answer from the session context
+- **DON'T** use generic placeholders when real data is available
+- **DON'T** ignore existing CLAUDE.md rules — the new prompt must be compatible
+
+### Phase 1: Clarify (ASK only what can't be inferred)
+
+After Phase 0, check what's still unknown. Only ask about gaps that can't be inferred:
+
+| Question | Ask only if... |
 |----------|----------------|
-| **What model?** | Claude 4.x, GPT-4, Gemini, local LLM — techniques differ |
-| **What task?** | Classification, generation, extraction, chat, code, analysis |
-| **Where will it run?** | API (system+user), chat UI, agent framework, n8n, etc. |
-| **Who is the end user?** | Developer, non-technical person, automated pipeline |
-| **What format is expected?** | JSON, free text, XML-tagged, markdown, structured |
-| **Are there examples?** | Input/output pairs improve quality dramatically |
+| **What model?** | Not obvious from project context (no SDK imports, no CLAUDE.md) |
+| **What task?** | User request is genuinely ambiguous |
+| **Where will it run?** | Multiple valid platforms possible |
+| **Who is the end user?** | Could be developer OR end-user facing |
+| **What format is expected?** | Multiple formats make sense for the task |
+| **Are there examples?** | None found in context AND task is complex |
 
-If the user doesn't specify — **ask**. Don't guess.
+If everything is clear from context — **skip Phase 1 entirely and go straight to building**.
 
 ### Phase 2: Build Using the 10-Part Framework
 
