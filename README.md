@@ -1,5 +1,9 @@
 # Claude Prompt Engineering
 
+<p align="center">
+  <img src="banner.png" alt="Claude Prompt Engineering" width="600">
+</p>
+
 > Expert prompt engineering skill for [Claude Code](https://claude.ai/code). Creates optimized, context-aware prompts for any task, any model, any use case.
 
 Built from official Anthropic sources — not academic frameworks, not guesswork.
