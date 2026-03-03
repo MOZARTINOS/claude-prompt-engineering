@@ -56,11 +56,15 @@ A complete, structured prompt with:
 | **Context-Aware (Phase 0)** | Automatically scans session, project files, and conversation to infer model, stack, persona, and format |
 | **10-Part Framework** | Systematic prompt structure from Anthropic's interactive tutorial |
 | **6 Task Templates** | Classification, Extraction, Creative, Chatbot, Code Gen, Analysis/RAG |
-| **Multi-Model** | Claude 4.x, GPT-4, Gemini, Llama, Mistral — adapts techniques per model |
-| **Anti-Hallucination** | Evidence-first, give-an-out, investigate-before-answering patterns |
-| **Quality Checklist** | 11-point verification before every prompt delivery |
-| **Anti-Patterns Table** | 10 common mistakes with fixes |
-| **Prompt Chaining** | Multi-step pipeline patterns (Generate → Review → Refine) |
+| **Multi-Model** | Claude 4.x, GPT-5/4o, Gemini 2.x, Llama 4, DeepSeek, Mistral — model-specific adaptations |
+| **Advanced Techniques** | Reflexion, ReAct, Tree of Thoughts, Skeleton-of-Thought, Emotion Prompting, Self-Consistency, Directional Stimulus |
+| **Meta-Prompting** | Contrastive Learning (LCP) optimization, Meta-Expert orchestration |
+| **Prompt Security** | Sandwich Defense, Salted XML Tags, Attack Short-Circuiting |
+| **Multimodal** | Temporal grounding for video/audio, resolution control, cross-modal analysis |
+| **Evaluation** | LLM-as-Judge scoring, RAG Triad quality checks |
+| **Anti-Hallucination** | Evidence-first, give-an-out, investigate-before-answering, Prompting Inversion awareness |
+| **Quality Checklist** | 13-point verification before every prompt delivery |
+| **Anti-Patterns Table** | 12 common mistakes with fixes |
 | **Bilingual Triggers** | English + Russian activation phrases |
 
 ## Context-Aware Prompt Generation
@@ -151,6 +155,7 @@ Build a RAG prompt that answers questions based on uploaded PDF documents
 Not every prompt needs all 10 parts. Start with all, then trim to the minimum effective set.
 
 ```
+CORE (10-Part Framework)
  0. Context Gathering        — Auto-detect from session (Phase 0)
  1. Role / Persona           — Who is the AI?
  2. Task Context             — Why does this task exist?
@@ -162,6 +167,23 @@ Not every prompt needs all 10 parts. Start with all, then trim to the minimum ef
  8. Thinking / Reasoning     — "Think step by step" before answering
  9. Output Format            — Exact structure specification
 10. Structured Output        — Model-specific enforcement (API level)
+
+ADVANCED (from 69-source deep research)
+11. Reflexion (RSIP)         — Self-critique before finalizing
+12. ReAct                    — Thought → Action → Observation loops
+13. Skeleton-of-Thought      — Outline first, expand second
+14. Emotion Prompting        — Psychological cues (+8-10% fidelity)
+15. Directional Stimulus     — Keyword anchoring for focus
+16. Self-Consistency         — Multiple paths, majority vote
+17. Tree of Thoughts         — Simulated expert panel with backtracking
+
+META & SECURITY
+18. Contrastive Optimization — Learn from failure analysis (LCP)
+19. Meta-Expert Orchestration— Conductor-Expert panel simulation
+20. Sandwich Defense         — Repeat constraints after untrusted input
+21. Salted XML Tags          — Anti-injection with random suffixes
+22. LLM-as-Judge             — Automated quality scoring
+23. RAG Triad                — Context/Groundedness/Answer relevance
 ```
 
 ## Model-Specific Adaptations
@@ -178,13 +200,16 @@ Not every prompt needs all 10 parts. Start with all, then trim to the minimum ef
 | Feature | claude-prompt-engineering | [prompt-architect](https://github.com/ckelsoe/claude-skill-prompt-architect) |
 |---------|--------------------------|-----------------|
 | **Approach** | Creates from scratch + context-aware | Transforms existing prompts |
-| **Source** | Official Anthropic docs | Academic frameworks (CO-STAR, RISEN) |
+| **Source** | Anthropic docs + 69-source deep research | Academic frameworks (CO-STAR, RISEN) |
+| **Techniques** | 23 (core + advanced + meta + security) | 7 frameworks |
 | **Context-aware** | Auto-detects project, stack, task | No context gathering |
-| **Multi-model** | Claude, GPT, Gemini, Local | Claude only |
+| **Multi-model** | Claude 4.x, GPT-5/4o, Gemini 2.x, Llama 4, DeepSeek | Claude only |
 | **Task templates** | 6 ready-to-use | None |
-| **Anti-patterns** | 10 documented with fixes | Not included |
-| **Quality checklist** | 11-point verification | 5-dimension analysis |
-| **Bilingual** | EN + RU | EN only |
+| **Security** | Sandwich, Salted XML, Short-Circuiting | Not included |
+| **Multimodal** | Video/audio temporal grounding | Not included |
+| **Evaluation** | LLM-as-Judge, RAG Triad | 5-dimension analysis |
+| **Anti-patterns** | 12 documented with fixes | Not included |
+| **Quality checklist** | 13-point verification | Not included |
 
 ## Contributing
 
