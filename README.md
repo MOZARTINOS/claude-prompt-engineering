@@ -56,15 +56,20 @@ A complete, structured prompt with:
 | **Context-Aware (Phase 0)** | Automatically scans session, project files, and conversation to infer model, stack, persona, and format |
 | **10-Part Framework** | Systematic prompt structure from Anthropic's interactive tutorial |
 | **6 Task Templates** | Classification, Extraction, Creative, Chatbot, Code Gen, Analysis/RAG |
-| **Multi-Model** | Claude 4.x, GPT-5/4o, Gemini 2.x, Llama 4, DeepSeek, Mistral — model-specific adaptations |
+| **Multi-Model** | Claude 4.x, GPT-5.1/4o, Gemini 2.5, Llama 4, DeepSeek R1, Mistral, Qwen 3, Grok |
 | **Advanced Techniques** | Reflexion, ReAct, Tree of Thoughts, Skeleton-of-Thought, Emotion Prompting, Self-Consistency, Directional Stimulus |
+| **Agentic Patterns** | Plan-then-Execute, Agent Memory Management, Multi-Agent Decision Protocols, Error Recovery |
 | **Meta-Prompting** | Contrastive Learning (LCP) optimization, Meta-Expert orchestration |
 | **Prompt Security** | Sandwich Defense, Salted XML Tags, Attack Short-Circuiting |
-| **Multimodal** | Temporal grounding for video/audio, resolution control, cross-modal analysis |
+| **Long-Context** | Lost-in-the-Middle mitigation, MapReduce summarization |
+| **Multimodal** | Temporal grounding, resolution control, OCR-Vision hybrid, Visual Chain-of-Thought |
 | **Evaluation** | LLM-as-Judge scoring, RAG Triad quality checks |
-| **Anti-Hallucination** | Evidence-first, give-an-out, investigate-before-answering, Prompting Inversion awareness |
-| **Quality Checklist** | 13-point verification before every prompt delivery |
-| **Anti-Patterns Table** | 12 common mistakes with fixes |
+| **Prompt Optimization** | Compression (MetaGlyph, LLMLingua), caching strategies, model routing/cascading |
+| **Prompt Debugging** | Bisection debugging (O(log n)), eval-driven development (Promptfoo) |
+| **Domain Patterns** | Legal (clause tagging), Medical (NER+LLM), Financial (reasoning/calculation split) |
+| **Production Patterns** | Prompt registries, CI/CD quality gates, observability, fine-tune vs. prompt decision |
+| **Quality Checklist** | 16-point verification before every prompt delivery |
+| **Anti-Patterns Table** | 15 common mistakes with fixes |
 | **Multilingual Triggers** | Activates in any language the user writes in |
 
 ## Context-Aware Prompt Generation
@@ -86,7 +91,7 @@ Session Context
 
 ## Sources
 
-This skill is synthesized from **4 official Anthropic documents**:
+This skill is synthesized from **4 official Anthropic documents**, enhanced with **69-source academic research** and **86-source practitioner research** (social media, dev blogs, production case studies):
 
 1. [Prompt Engineering Interactive Tutorial](https://github.com/anthropics/prompt-eng-interactive-tutorial) — 9 chapters + 3 appendices
 2. [Claude Prompting Best Practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) — production patterns for Claude 4.x
@@ -184,26 +189,47 @@ META & SECURITY
 21. Salted XML Tags          — Anti-injection with random suffixes
 22. LLM-as-Judge             — Automated quality scoring
 23. RAG Triad                — Context/Groundedness/Answer relevance
+
+AGENTIC & LONG-CONTEXT (from 86-source practitioner research)
+24. Plan-then-Execute        — Secure planning/execution separation
+25. Agent Memory Management  — 4 memory patterns for agentic systems
+26. Multi-Agent Decisions    — Consensus vs. voting protocols
+27. Agentic Error Recovery   — Retry, self-critique, graceful degradation
+28. Lost-in-the-Middle       — U-shaped attention curve mitigations
+29. MapReduce Summarization  — Chunk → Map → Reduce for long docs
+
+MULTIMODAL & OPTIMIZATION
+30. OCR-Vision Hybrid        — Image + OCR text for max accuracy
+31. Visual Chain-of-Thought  — See → Think → Confirm → Answer
+32. Prompt Compression       — MetaGlyph, LLMLingua, rule-based
+33. Prompt Caching           — Provider-specific cache strategies
+34. Model Routing            — Cost-optimized model cascading
+
+DEBUGGING & PRODUCTION
+35. Prompt Bisection         — O(log n) systematic debugging
+36. Eval-Driven Development  — Test-driven prompt CI/CD
 ```
 
 ## Model-Specific Adaptations
 
 | Model | Key Adjustments |
 |-------|----------------|
-| **Claude 4.x** | No prefill on last assistant turn (4.6+), no aggressive language, adaptive thinking, structured outputs |
-| **GPT-4/4o** | `response_format` for JSON, JSON schema preferred over XML |
-| **Gemini** | Separate system instructions, response schema, Google Search grounding |
-| **Local (Llama, Mistral)** | Simpler prompts, more examples (5-10), explicit JSON schema |
+| **Claude 4.x** | No prefill (4.6+), "think" tool, adaptive thinking, structured outputs |
+| **GPT-5/5.1** | Hard vs. soft constraints, tool preambles, agentic eagerness calibration |
+| **Gemini 2.5** | Separate system instructions, Google Search grounding, 1M-token context |
+| **DeepSeek R1** | Zero-shot > few-shot, minimal prompts, user role preferred |
+| **Grok (xAI)** | Confidence labeling, surface-specific behavior, explicit boundaries |
+| **Local (Llama 4, Qwen 3, Mistral)** | Official instruct templates, more examples (5-10), explicit JSON schema |
 
 ## How It Compares
 
 | Feature | claude-prompt-engineering | [prompt-architect](https://github.com/ckelsoe/claude-skill-prompt-architect) |
 |---------|--------------------------|-----------------|
 | **Approach** | Creates from scratch + context-aware | Transforms existing prompts |
-| **Source** | Anthropic docs + 69-source deep research | Academic frameworks (CO-STAR, RISEN) |
-| **Techniques** | 23 (core + advanced + meta + security) | 7 frameworks |
+| **Source** | Anthropic docs + 69 academic + 86 practitioner sources | Academic frameworks (CO-STAR, RISEN) |
+| **Techniques** | 36 (core + advanced + agentic + optimization + debugging) | 7 frameworks |
 | **Context-aware** | Auto-detects project, stack, task | No context gathering |
-| **Multi-model** | Claude 4.x, GPT-5/4o, Gemini 2.x, Llama 4, DeepSeek | Claude only |
+| **Multi-model** | Claude 4.x, GPT-5.1, Gemini 2.5, Llama 4, DeepSeek R1, Qwen 3, Grok | Claude only |
 | **Task templates** | 6 ready-to-use | None |
 | **Security** | Sandwich, Salted XML, Short-Circuiting | Not included |
 | **Multimodal** | Video/audio temporal grounding | Not included |
